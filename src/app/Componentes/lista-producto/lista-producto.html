@@ -1,1 +1,63 @@
-<p>lista-producto works!</p>
+<!-- Contenedor principal de Bootstrap para centrar y añadir márgenes -->
+<div class="container mt-5">
+
+  <!-- Título de la sección -->
+  <h2 class="mb-4 text-center">Listado de Productos</h2>
+
+  <!-- 
+    Usamos la directiva *ngIf para verificar si hay productos en el array.
+    Si el array está vacío, mostramos un mensaje de alerta.
+    La etiqueta <ng-template> con la referencia #noProducts se mostrará si la condición es falsa.
+  -->
+  <div *ngIf="productos.length > 0; else noProducts">
+    
+    <!-- 
+      Tabla de Bootstrap para mostrar los datos de forma estructurada.
+      - .table: Estilo base.
+      - .table-striped: Añade franjas de color alternas a las filas.
+      - .table-hover: Resalta la fila al pasar el cursor sobre ella.
+      - .table-bordered: Añade bordes a la tabla y celdas.
+    -->
+    <table class="table table-striped table-hover table-bordered">
+      
+      <!-- Cabecera de la tabla con un tema oscuro -->
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre del Producto</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Stock Disponible</th>
+        </tr>
+      </thead>
+      
+      <!-- Cuerpo de la tabla -->
+      <tbody>
+        <!-- 
+          La directiva *ngFor itera sobre cada 'producto' en el array 'productos' del componente.
+          Por cada producto, crea una nueva fila <tr> en la tabla.
+        -->
+        <tr *ngFor="let producto of productos">
+          <th scope="row">{{ producto.id }}</th>
+          <td>{{ producto.nombre }}</td>
+          <!-- 
+            Usamos el pipe 'currency' de Angular para formatear el precio
+            con el símbolo de dólar y dos decimales. Puedes cambiar '$' por 'EUR', etc.
+          -->
+          <td>{{ producto.precio | currency:'$' }}</td>
+          <td>{{ producto.stock }} unidades</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 
+    Esta es la plantilla que se muestra si no hay productos.
+    Angular la renderizará gracias a la condición "else noProducts" del div anterior.
+  -->
+  <ng-template #noProducts>
+    <div class="alert alert-warning text-center" role="alert">
+      No hay productos para mostrar en este momento.
+    </div>
+  </ng-template>
+
+</div>
