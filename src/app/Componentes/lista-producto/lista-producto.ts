@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 // --- Modelo de Datos ---
 // Se convierte la interfaz en una clase para poder instanciarla y, opcionalmente, añadirle métodos.
@@ -18,11 +19,10 @@ export class Producto {
 
 @Component({
   selector: 'app-lista-producto',
-  // NOTA: Para un componente standalone, necesitarías importar CommonModule
-  // para poder usar directivas como *ngFor en la plantilla.
-  // imports: [CommonModule], 
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './lista-producto.html',
-  styleUrl: './lista-producto.scss'
+  styleUrls: ['./lista-producto.scss']
 })
 export class ListaProducto implements OnInit {
 

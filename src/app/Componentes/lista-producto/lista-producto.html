@@ -9,12 +9,16 @@
     Si el array está vacío, mostramos un mensaje de alerta.
     La etiqueta <ng-template> con la referencia #noProducts se mostrará si la condición es falsa.
   -->
-  <div *ngIf="productos.length > 0; else noProducts">
-    
-    <!-- 
-      Tabla de Bootstrap para mostrar los datos de forma estructurada.
-      - .table: Estilo base.
-      - .table-striped: Añade franjas de color alternas a las filas.
+  <ng-template #noProducts>
+    <div class="alert alert-warning text-center" role="alert">
+      No hay productos para mostrar en este momento.
+    </div>
+  </ng-template>
+
+  <!-- 
+    Tabla de Bootstrap para mostrar los datos de forma estructurada.
+    - .table: Estilo base.
+    - .table-striped: Añade franjas de color alternas a las filas.
       - .table-hover: Resalta la fila al pasar el cursor sobre ella.
       - .table-bordered: Añade bordes a la tabla y celdas.
     -->
@@ -43,7 +47,7 @@
             Usamos el pipe 'currency' de Angular para formatear el precio
             con el símbolo de dólar y dos decimales. Puedes cambiar '$' por 'EUR', etc.
           -->
-          <td>{{ producto.precio | currency:'$' }}</td>
+          <td>{{ producto.precio}}</td>
           <td>{{ producto.stock }} unidades</td>
         </tr>
       </tbody>
@@ -59,5 +63,4 @@
       No hay productos para mostrar en este momento.
     </div>
   </ng-template>
-
-</div>
+  
